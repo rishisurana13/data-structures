@@ -3,7 +3,7 @@ Linked lists are data structures consisting of chained nodes, where each
 node contains data and a pointer to the next node. In doubly linked lists 
 there are pointers to the previous and next value.
 
-A value is at the start of a linked list is called the head, with the last value being the tail.
+A node that is at the start of a linked list is called the head, with the last node being the tail.
 
 A node is considered to be the tail if the next node property of a node is null or None.
 
@@ -13,7 +13,7 @@ A node is considered to be the head if the previous node property of a node is n
 class Node:
 	def __init__(self, data,nextn,prev):
 		self.data = data
-		self.nextn = nextn
+		self.nextn = nextn # nextn = next node, next is a reserved variable name in python.
 		self.prev = prev
 
 
@@ -26,6 +26,7 @@ class DLinkedList:
 
 	def initializeList(self, data):
 		# Creates a doubly linked list using an input list/array of data values
+		# This method must be called to create the nodes of the linked list.
 		curr_node = None
 		next_node = None
 		return_list = []
@@ -59,8 +60,8 @@ class DLinkedList:
 
 			prev = node.prev
 			nextn = node.nextn 
-			prev_data = 0
-			nextn_data = 0
+			prev_data = None
+			nextn_data = None
 
 			# Head prev value and Tail next value is set to none
 			if node.prev != None:
@@ -74,7 +75,6 @@ class DLinkedList:
 			if node.nextn == None:
 				break
 			node = node.nextn
-		print('NULL')
 
 	def showNodes(self):
 		# shows node datapoints in adjacence to eachother
@@ -140,7 +140,7 @@ class DLinkedList:
 			if node == None:
 				# If nextn == none then we have arrived at the end of the list,
 				# therefore the node does not exist.
-				print(f'Node with value "{data}"  not found')
+				print(f'Node with value "{data}"  not found.')
 				return
 
 		# if tail is removed
@@ -160,8 +160,10 @@ class DLinkedList:
 		
 
 data = ['rishi', 'abhishek', 'aman', 'ahan', 'yohu', 'sid']
-new_list = DLinkedList().
+new_list = DLinkedList()
 new_list.initializeList(data)
+new_list.removeNode('rishi')
+new_list.traverseList()
 
 
 
