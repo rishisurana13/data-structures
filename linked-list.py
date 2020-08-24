@@ -8,6 +8,14 @@ A node that is at the start of a linked list is called the head, with the last n
 A node is considered to be the tail if the next node property of a node is null or None.
 
 A node is considered to be the head if the previous node property of a node is null or None. (doubly linked list only)
+
+Time Complexity:
+
+- Search: O(n)
+- Insert/Remove at head: O(1)
+- Insert/Remove at tail: O(1)
+- Remove/Insert in Middle: O(n)
+
 """
 
 class Node:
