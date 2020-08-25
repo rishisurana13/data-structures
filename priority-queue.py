@@ -113,9 +113,30 @@ class BinaryMinHeap:
 		With this method always ensure if the heap invariant is satisfied before swapping.
 
 		"""
-	def removeAt(self, data):
-	
-		pass
+	def removeEl(self, data):
+		pos = ''
+		for el in self.heap:
+			if el == data:
+				pos = self.heap.index(el)
+
+		if pos == '':
+			print('This element does not exist')
+			return 0
+		self.heap[pos], self.heap[-1] = self.heap[-1], self.heap[pos]
+
+		self.heap.pop()
+		if len(self.heap) >= 2:
+			# Check if child node is smaller
+			if self.heap[pos] > self.heap[pos // 2]:
+			# if the current element at index pos is larger then 
+			# if the  
+				self.percolate_down(pos)
+			# check if child node is smaller
+			elif self.heap[(2 * pos) + 1] < self.heap[pos]:
+				self.percolate_up(pos)
+		
+
+
 
 	def percolate_up(self, position):
 		if position == -1:
@@ -165,18 +186,41 @@ class BinaryMinHeap:
 			return right
 		else:
 			return left
+	def displayTree(self):
+		heap = self.heap
+		spaces = len(heap)//2
+		# original right most node
+		bingo = 2 
+		for el in heap:
+			if heap.index(el) == 0:
+				print('	' * (spaces), el)
+				spaces = 0.75 * float(spaces)
+				# continue
+			else:
+				
+				print('	' * (int(spaces)), el,end='')
+				if heap.index(el) == bingo:
+					print('\n')
+					# according to the structure of a binary tree
+					# the last node of a level is i*2 + 2 (think right node formula)
+					# starting with 2, the next right most node is i = 6, then i = 14 and so on.
+					bingo = int(heap.index(el)*2 + 2) 
+					spaces = 0.75 * float(spaces)
+		print('\n' * 3)
 
 
 
 
 
-# data = [0,1,2,4,5, 6, 7, 8]
-# heap_tree = BinaryMinHeap()
-# heap_tree.initialiseHeap(data)
-# heap_tree.insert(3)
+
+data = [0,1,2,4,5, 6, 7, 8, 12, 14, 18, 20, 27, 30]
+heap_tree = BinaryMinHeap()
+heap_tree.initialiseHeap(data)
+
+heap_tree.insert(3)
 # print('Original: ',heap_tree.heap)
-# heap_tree.poll()
-# heap_tree.poll()
+# heap_tree.displayTree()
 # print('finished: ',heap_tree.heap)
+heap_tree.displayTree()
 
 
