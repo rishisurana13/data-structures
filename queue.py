@@ -32,7 +32,7 @@ class Queue:
 	is at index 0 and the end is index -1 (the last element).
 
 	Newly added elements will be inserted at the end of the queue.
-	Items to be dequed/removed will be those at the start of the queue.
+	Items to be dequed/removed will be those at the start of the queue at index 0.
 	"""
 	def __init__(self):
 		self.queue = []

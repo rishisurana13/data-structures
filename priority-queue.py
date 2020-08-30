@@ -106,7 +106,7 @@ class BinaryMinHeap:
 
 
 		"""
-		The method below - removaAt() - is exactly like polling, where the target node swaps positions with the last node in the tree,
+		The method below - removeEl() - is exactly like polling, where the target node swaps positions with the last node in the tree,
 		and is removed. Then node swapped into the target nodes position either bubbles up or down depending
 		on the tree variation.
 
@@ -115,9 +115,9 @@ class BinaryMinHeap:
 		"""
 	def removeEl(self, data):
 		pos = ''
-		for el in self.heap:
+		for idx, el in enumerate(self.heap):
 			if el == data:
-				pos = self.heap.index(el)
+				pos = idx
 
 		if pos == '':
 			print('This element does not exist')
@@ -155,9 +155,9 @@ class BinaryMinHeap:
 		heap_capacity = len(self.heap) -1
 		heap = self.heap
 		while position < heap_capacity + 1 and position is not None:
-			# index value of left and right children
 			if position == None:
 				break
+			# index value of left and right children
 			left = (2*position) + 1
 			right = (2*position) + 2
 
@@ -186,27 +186,35 @@ class BinaryMinHeap:
 			return right
 		else:
 			return left
+
 	def displayTree(self):
+		# this is a rough design of representing a binary heap in the terminal
+		# This can be used to display up to 3 levels
+		# Scale up your terminal screen to ~400px-500px in width.
 		heap = self.heap
 		spaces = len(heap)//2
-		# original right most node
+
+		# original right most node index or 2(i=0) + 2
 		bingo = 2 
-		for el in heap:
-			if heap.index(el) == 0:
+		for idx, el in enumerate(heap):
+			if idx == 0:
 				print('	' * (spaces), el)
 				spaces = 0.75 * float(spaces)
 				# continue
 			else:
 				
 				print('	' * (int(spaces)), el,end='')
-				if heap.index(el) == bingo:
-					print('\n')
+				if idx == bingo:
+					print('\n' * 3)
 					# according to the structure of a binary tree
-					# the last node of a level is i*2 + 2 (think right node formula)
-					# starting with 2, the next right most node is i = 6, then i = 14 and so on.
-					bingo = int(heap.index(el)*2 + 2) 
-					spaces = 0.75 * float(spaces)
-		print('\n' * 3)
+					# the right most node of a level is the right most node of the right most 
+					# node using the formula i*2 + 2 (think right node formula)
+					# starting with i = 2 (right most on level 1), the next right most node is i = 6, 
+					# then i = 14 and so on.
+					bingo = int(idx*2 + 2) 
+					# an approximation of reducing the spaces between nodes after each level
+					spaces = 0.625 * float(spaces)
+		print('\n' * 2)
 
 
 
